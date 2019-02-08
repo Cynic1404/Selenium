@@ -1,6 +1,7 @@
 from fixture.application import Application
 import pytest
 from model.contact import Contact
+from fixture.session import SessionHelper
 
 
 
@@ -12,13 +13,13 @@ def app(request):
 
 def test_add_contact(app):
         app.open_home_page()
-        app.login(username="admin", password="secret")
-        app.add_contact(Contact(name="First contact", last_name="last", mobile_phone="mobile", company="company"))
-        app.logout()
+        app.session.login(username="admin", password="secret")
+        app.contact.create(Contact(name="First contact", last_name="last", mobile_phone="mobile", company="company"))
+        app.session.logout()
 
 def test_add_emplty_contact(app):
         app.open_home_page()
-        app.login(username="admin", password="secret")
-        app.add_contact(Contact(name="", last_name="", mobile_phone="", company=""))
-        app.logout()
+        app.session.login(username="admin", password="secret")
+        app.contact.create(Contact(name="", last_name="", mobile_phone="", company=""))
+        app.session.logout()
 

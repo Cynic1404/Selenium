@@ -1,0 +1,13 @@
+class ContactHelper:
+    def __init__(self, app):
+        self.app = app
+
+
+    def create(self, contact):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//*[@id="nav"]/ul/li[2]/a').click()
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[3]').send_keys(contact.name)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[5]').send_keys(contact.last_name)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[11]').send_keys(contact.mobile_phone)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[9]').send_keys(contact.company)
+        wd.find_element_by_xpath('// *[ @ id = "content"] / form / input[1]').click()
