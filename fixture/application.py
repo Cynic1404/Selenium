@@ -1,7 +1,7 @@
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-class Application:
+class Application: #constructor of fixture
     def __init__(self):
         self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
@@ -61,6 +61,6 @@ class Application:
         wd.find_element_by_xpath('//*[@id="content"]/form/input[9]').send_keys(contact.company)
         wd.find_element_by_xpath('// *[ @ id = "content"] / form / input[1]').click()
 
-    def destroy(self):
+    def destroy(self): #
         self.wd.quit()
 

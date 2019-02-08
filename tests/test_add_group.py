@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
-import unittest
 import pytest
-from group import Group
-from application import Application
-from selenium import webdriver
+from model.group import Group
+from fixture.application import Application
 
 
 @pytest.fixture
