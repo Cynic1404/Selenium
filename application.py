@@ -51,5 +51,16 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
+
+    def add_contact(self, contact):
+        wd = self.wd
+        wd.find_element_by_xpath('//*[@id="nav"]/ul/li[2]/a').click()
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[3]').send_keys(contact.name)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[5]').send_keys(contact.last_name)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[11]').send_keys(contact.mobile_phone)
+        wd.find_element_by_xpath('//*[@id="content"]/form/input[9]').send_keys(contact.company)
+        wd.find_element_by_xpath('// *[ @ id = "content"] / form / input[1]').click()
+
     def destroy(self):
         self.wd.quit()
+
