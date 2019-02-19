@@ -2,11 +2,13 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
+from selenium import webdriver
 
 
 class Application: #constructor of fixture
     def __init__(self):
-        self.wd = WebDriver(capabilities={"marionette": False})
+        #self.wd = WebDriver(capabilities={"marionette": False})
+        self.wd = webdriver.Chrome("C:\Python\chromedriver.exe")
         self.wd.implicitly_wait(60)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
