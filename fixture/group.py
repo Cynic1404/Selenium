@@ -35,7 +35,7 @@ class GroupHelper:
         wd.find_element_by_name("new").click()
         # fill the forms
         self.fill_group_form(group)
-        # submt group creation
+        # submit group creation
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
 
