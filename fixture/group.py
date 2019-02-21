@@ -54,4 +54,19 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
+    def count(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        return len(wd.find_elements_by_name("selected[]"))
+
+    def delete_all_froups(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_all_groups()
+        wd.find_element_by_name("delete").click()
+
+    def select_all_groups(self):
+        wd = self.app.wd
+        for i in (wd.find_elements_by_name("selected[]")):
+            i.click()
 
