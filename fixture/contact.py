@@ -49,7 +49,10 @@ class ContactHelper:
 
     def open_contacts_page(self):
         wd = self.app.wd
-        wd.find_element_by_xpath('//*[@id="nav"]/ul/li[1]/a').click()
+        if wd.current_url.endswith("addressbook/"):
+            return
+        else:
+            wd.find_element_by_xpath('//*[@id="nav"]/ul/li[1]/a').click()
 
     def select_all_contacts(self):
         wd = self.app.wd
