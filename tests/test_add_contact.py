@@ -2,7 +2,7 @@ from model.contact import Contact
 
 def test_add_contact(app):
         old_contacts = app.contact.get_contacts_list()
-        contact = Contact(name="hhgrdgrghh", last_name="lhhthrfhfast", mobile_phone="mobhfhtfdhfile")
+        contact = Contact(name="dfbf", last_name="zxvzv", mobile_phone="p[oi")
         app.contact.create(contact)
         new_contacts = app.contact.get_contacts_list()
         assert app.contact.count()-len(old_contacts) == 1
