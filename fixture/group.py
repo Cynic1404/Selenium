@@ -49,15 +49,23 @@ class GroupHelper:
 
 
     def delete_first_grpoup(self):
+        self.delete_grpoup_by_index(0)
+
+    def delete_grpoup_by_index(self, index):
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("delete").click()
         self.group_cache = None
 
     def select_first_group(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_css_selector('span.group')[index].click()
+
 
     def return_to_groups_page(self):
         wd = self.app.wd
