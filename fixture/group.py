@@ -1,3 +1,5 @@
+from model.group import Group
+
 class GroupHelper:
     def __init__(self, app):
         self.app = app
@@ -20,8 +22,8 @@ class GroupHelper:
         wd = self.app.wd
         if text is not None:
             print(text)
-            #wd.find_element_by_name(field_name).click()
-            #wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
     def modify_first_group(self, new_group_data):
@@ -73,4 +75,15 @@ class GroupHelper:
         wd = self.app.wd
         for i in (wd.find_elements_by_name("selected[]")):
             i.click()
+
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        group = []
+        for el in wd.find_elements_by_css_selector('span.group'):
+            text = el.text
+            id = el.find_element_by_name("selected[]").get_attribute("value")
+            group.append(Group(id = id, name = text))
+
+        return group
 
