@@ -23,3 +23,4 @@ def test_delete_all_groups(app):
     if app.group.count() == 0:
         app.group.create(Group(name = "Group for deleting"))
     app.group.delete_all_froups()
+    assert app.group.count() == 0
