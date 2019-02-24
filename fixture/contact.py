@@ -37,6 +37,16 @@ class ContactHelper:
         self.open_contacts_page()
         self.contacts_cache = None
 
+    def modify_contact_by_index(self, new_contact_data, index):
+        wd = self.app.wd
+        self.open_contacts_page()
+        wd.find_elements_by_name("entry")[index].find_elements_by_tag_name("td")[7].click()
+        self.fill_contact_form(new_contact_data)
+        wd.find_element_by_name("update").click()
+        self.open_contacts_page()
+        self.contacts_cache = None
+
+
 
     def delete_contact_by_index(self, index):
         wd = self.app.wd
