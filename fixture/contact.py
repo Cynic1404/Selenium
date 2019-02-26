@@ -46,6 +46,24 @@ class ContactHelper:
         self.open_contacts_page()
         self.contacts_cache = None
 
+    def open_contact_to_edit_by_index(self, index):
+        wd = self.app.wd
+        self.open_contacts_page()
+        wd.find_elements_by_name("entry")[index].find_elements_by_tag_name("td")[7].click()
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contact_to_edit_by_index(index)
+        name = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        homephone = wd.find_element_by_name("home").get_attribute("value")
+        mobile_phone = wd.find_element_by_name("mobile").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
+        secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        return Contact(name= name, last_name=lastname, homephone=homephone, mobile_phone=mobile_phone, workphone=workphone, secondaryphone=secondaryphone, id=id)
+
+
 
 
     def delete_contact_by_index(self, index):
@@ -108,11 +126,18 @@ class ContactHelper:
             self.open_contacts_page()
             self.contacts_cache = []
             for el in wd.find_elements_by_name("entry"):
+
                 id = el.find_element_by_name("selected[]").get_attribute("value")
-                first_name = el.find_elements_by_tag_name("td")[2].text
-                last_name = el.find_elements_by_tag_name("td")[1].text
-                self.contacts_cache.append(Contact(id = id, name=first_name, last_name=last_name))
+                cells = el.find_elements_by_tag_name("td")
+                first_name = cells[2].text
+                last_name = cells[1].text
+                all_phones = cells[5].text.splitlines()
+                homephone = all_phones[0]
+                mobile_phone = all_phones[1]
+                workphone = all_phones[2]
+                secondaryphone = all_phones[3]
+
+
+                self.contacts_cache.append(Contact(id = id, name=first_name, last_name=last_name, homephone=homephone, mobile_phone=mobile_phone, workphone=workphone,secondaryphone=secondaryphone))
         return self.contacts_cache
-
-
 
