@@ -16,11 +16,15 @@ class ContactHelper:
     def fill_contact_form(self, contact):
         self.change_field_value("firstname", contact.name)
         self.change_field_value("lastname", contact.last_name)
+        self.change_field_value("address", contact.address)
         self.change_field_value("mobile", contact.mobile_phone)
         self.change_field_value("company", contact.company)
         self.change_field_value("home", contact.homephone)
         self.change_field_value("phone2", contact.secondaryphone)
         self.change_field_value("work", contact.workphone)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("email2", contact.email2)
+        self.change_field_value("email3", contact.email3)
 
 
 
@@ -65,7 +69,13 @@ class ContactHelper:
         workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
-        return Contact(name= name, last_name=lastname, homephone=homephone, mobile_phone=mobile_phone, workphone=workphone, secondaryphone=secondaryphone, id=id)
+        address = wd.find_element_by_name("address").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
+        return Contact(name= name, last_name=lastname, homephone=homephone, mobile_phone=mobile_phone,
+                       address=address, workphone=workphone, secondaryphone=secondaryphone, id=id,
+                       email = email, email2 = email2, email3 =email3)
 
 
 
@@ -134,12 +144,11 @@ class ContactHelper:
                 cells = el.find_elements_by_tag_name("td")
                 first_name = cells[2].text
                 last_name = cells[1].text
-                all_phones = cells[5].text.splitlines()
-                homephone = all_phones[0]
-                mobile_phone = all_phones[1]
-                workphone = all_phones[2]
-                secondaryphone = all_phones[3]
-                self.contacts_cache.append(Contact(id = id, name=first_name, last_name=last_name, homephone=homephone, mobile_phone=mobile_phone, workphone=workphone,secondaryphone=secondaryphone))
+                all_phones = cells[5].text
+                address = cells[3].text
+                all_emails = cells[4].text
+                self.contacts_cache.append(Contact(id = id, name=first_name, last_name=last_name,
+                                                   all_phones=all_phones, address=address, all_emails = all_emails))
         return self.contacts_cache
 
     def open_contact_view_by_index(self, index):

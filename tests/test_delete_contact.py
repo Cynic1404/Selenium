@@ -26,9 +26,9 @@ def test_delete_some_contact(app):
 #     assert sorted(old_contacts, key=Contact.id_or_max)==sorted(new_contacts, key=Contact.id_or_max)
 
 
-# def test_delete_all_contacts(app):
-#     if app.contact.count() == 0:
-#         app.contact.create(Contact(name = "Contact for deleting", mobile_phone="+111111111", secondaryphone="44444444", homephone="5455554353", workphone="324234324"))
-#     app.contact.delete_all_contacts()
-#     assert app.contact.count() == 0
-#
+def test_delete_all_contacts(app):
+    if app.contact.count() == 0:
+        app.contact.create(Contact(name = "Contact for deleting", mobile_phone="+111111111", secondaryphone="44444444", homephone="5455554353", workphone="324234324"))
+    app.contact.delete_all_contacts()
+    assert app.contact.count() == 0
+
