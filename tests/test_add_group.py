@@ -5,7 +5,7 @@ from model.group import Group
 testdata = [Group(name ="First class group", header ="First class header", footer ="Firt class footer"),
         Group(name="", header="", footer="")]
 
-@pytest.mark.parametrize("group", testdata)
+@pytest.mark.parametrize("group", testdata, ids = [repr(x) for x in testdata])
 def test_add_group(app, group):
     old_groups = app.group.get_group_list()
     app.group.create(group)
