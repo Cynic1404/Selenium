@@ -6,9 +6,14 @@ from selenium import webdriver
 
 
 class Application: #constructor of fixture
-    def __init__(self):
-        #self.wd = WebDriver(capabilities={"marionette": False})
-        self.wd = webdriver.Chrome("C:\Python\chromedriver.exe")
+    def __init__(self, browser = "chrome"):
+        if browser == "chrome":
+            self.wd = webdriver.Chrome("C:\Python\chromedriver.exe")
+        elif browser == "firefox":
+            self.wd = WebDriver(capabilities={"marionette": False})
+        else:
+            raise ValueError ("Unrecognized browser %s" % browser)
+
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)

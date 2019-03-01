@@ -73,7 +73,8 @@ class GroupHelper:
 
     def select_group_by_index(self, index):
         wd = self.app.wd
-        wd.find_elements_by_css_selector('span.group')[index].click()
+        #wd.find_elements_by_css_selector('span.group')[index].click()
+        wd.find_elements_by_name("selected[]")[index].click()
 
 
     def return_to_groups_page(self):
