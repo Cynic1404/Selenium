@@ -6,7 +6,7 @@ from selenium import webdriver
 
 
 class Application: #constructor of fixture
-    def __init__(self, browser = "chrome"):
+    def __init__(self, browser = "chrome", url = "http://localhost/addressbook/"):
         if browser == "chrome":
             self.wd = webdriver.Chrome("C:\Python\chromedriver.exe")
         elif browser == "firefox":
@@ -17,6 +17,7 @@ class Application: #constructor of fixture
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
+        self.url = url
 
     def is_valid(self):
         try:
@@ -27,7 +28,7 @@ class Application: #constructor of fixture
 
     def open_home_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        wd.get(self.url)
 
 
 
